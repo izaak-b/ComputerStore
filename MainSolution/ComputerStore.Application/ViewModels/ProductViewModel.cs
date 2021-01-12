@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ComputerStore.Domain.Models
+namespace ComputerStore.Application.ViewModels
 {
-    public class Product
+    public class ProductViewModel
     {
-        [Key]
         public Guid Id { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public double Price { get; set; }
-        [Required]
         public string Description { get; set; }
-        [Required]
-        public virtual Category Category { get; set; }
-        [ForeignKey("Category")]
+        public virtual CategoryViewModel Category { get; set; }
         public int CategoryId { get; set; }
         public string ImageUrl { get; set; }
     }

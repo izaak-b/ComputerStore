@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using ComputerStore.Application.Interfaces;
 using ComputerStore.Application.ViewModels;
 using ComputerStore.Data.Repositories;
@@ -23,7 +24,18 @@ namespace ComputerStore.Application.Services
 
         public void AddProduct(ProductViewModel product)
         {
-            var newProduct = _mapper.Map<ProductViewModel, Product>(product);
+            /*var newProduct = _mapper.Map<ProductViewModel, Product>(product);
+            _productsRepo.AddProduct(newProduct);*/
+
+            Product newProduct = new Product()
+            {
+                Description = product.Description,
+                Name = product.Name,
+                Price = product.Price,
+                CategoryId = product.Category.Id,
+                ImageUrl = product.ImageUrl
+            };
+
             _productsRepo.AddProduct(newProduct);
         }
 
@@ -36,9 +48,8 @@ namespace ComputerStore.Application.Services
 
         public IQueryable<ProductViewModel> GetProducts()
         {
-            var products = _productsRepo.GetProducts();
-            var result = _mapper.Map<IQueryable<Product>, IQueryable<ProductViewModel>>(products);
-            return result;
+            var products = _productsRepo.GetProducts().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
+            return products;
         }
 
         public IQueryable<ProductViewModel> GetProducts(int category)

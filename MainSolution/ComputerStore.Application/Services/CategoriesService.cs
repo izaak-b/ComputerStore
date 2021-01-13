@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using ComputerStore.Application.Interfaces;
 using ComputerStore.Application.ViewModels;
 using ComputerStore.Domain.Interfaces;
@@ -23,9 +24,8 @@ namespace ComputerStore.Application.Services
 
         public IQueryable<CategoryViewModel> GetCategories()
         {
-            var categories = _repo.GetCategories();
-            var result = _mapper.Map<IQueryable<Category>, IQueryable<CategoryViewModel>>(categories);
-            return result;
+            var categories = _repo.GetCategories().ProjectTo<CategoryViewModel>(_mapper.ConfigurationProvider);
+            return categories;
         }
     }
 }

@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ComputerStore.Domain.Models
+namespace ComputerStore.Application.ViewModels
 {
-    public class Member
+    public class MemberViewModel
     {
-        [Key]
         public string Email { get; set; }
-        [Required]
         public string FirstName { get; set; }
-        [Required]
         public string LastName { get; set; }
-        [Required]
         public string CreditCard { get; set; }
     }
 }

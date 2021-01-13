@@ -21,11 +21,11 @@ namespace ComputerStore.IOC
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<IProductsService, ProductsService>();
 
-            /*services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<ICategoriesService, CategoriesService>();
 
-            /*services.AddScoped<IMembersRepository, MembersRepository>();
-            services.AddScoped<IMembersService, MembersService>();*/
+            services.AddScoped<IMembersRepository, MembersRepository>();
+            services.AddScoped<IMembersService, MembersService>();
 
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
             AutoMapperConfiguration.RegisterMappings();

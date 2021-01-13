@@ -9,6 +9,7 @@ namespace ComputerStore.Domain.Interfaces
     public interface IProductsRepository
     {
         IQueryable<Product> GetProducts();
+        IQueryable<Product> GetProducts(int category);
         Product GetProduct(Guid id);
         Guid AddProduct(Product p);
     }

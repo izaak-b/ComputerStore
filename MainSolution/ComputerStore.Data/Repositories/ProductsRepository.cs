@@ -32,5 +32,10 @@ namespace ComputerStore.Data.Repositories
         {
             return _context.Products;
         }
+
+        public IQueryable<Product> GetProducts(int category)
+        {
+            return _context.Products.Where(x => x.CategoryId == category);
+        }
     }
 }

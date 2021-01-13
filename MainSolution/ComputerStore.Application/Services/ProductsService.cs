@@ -20,6 +20,20 @@ namespace ComputerStore.Application.Services
             _productsRepo = productsRepo;
             _mapper = mapper;
         }
+
+        public void AddProduct(ProductViewModel product)
+        {
+            var newProduct = _mapper.Map<ProductViewModel, Product>(product);
+            _productsRepo.AddProduct(newProduct);
+        }
+
+        public ProductViewModel GetProduct(Guid id)
+        {
+            var product = _productsRepo.GetProduct(id);
+            var result = _mapper.Map<Product, ProductViewModel>(product);
+            return result;
+        }
+
         public IQueryable<ProductViewModel> GetProducts()
         {
             var products = _productsRepo.GetProducts();
@@ -29,7 +43,7 @@ namespace ComputerStore.Application.Services
 
         public IQueryable<ProductViewModel> GetProducts(int category)
         {
-            var products = _productsRepo.GetProducts();
+            var products = _productsRepo.GetProducts(category);
             var result = _mapper.Map<IQueryable<Product>, IQueryable<ProductViewModel>>(products);
             return result;
         }

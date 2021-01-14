@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ComputerStore.Domain.Models
 {
-    public class Order
+    public class Cart
     {
         [Key]
         public Guid Id { get; set; }

@@ -70,5 +70,11 @@ namespace PresentationWebApp.Controllers
             ViewBag.Categories = listOfCategories;
             return View(data);
         }
+
+        public IActionResult Details(Guid id)
+        {
+            var product = _productsService.GetProduct(id);
+            return View(product);
+        }
     }
 }

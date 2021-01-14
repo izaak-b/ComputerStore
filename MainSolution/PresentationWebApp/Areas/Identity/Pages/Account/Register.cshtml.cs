@@ -25,19 +25,22 @@ namespace PresentationWebApp.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly IMembersService _membersService;
+        private readonly ICartsService _cartsService;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IMembersService membersService)
+            IMembersService membersService,
+            ICartsService cartsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _membersService = membersService;
+            _cartsService = cartsService;
         }
 
         [BindProperty]
@@ -101,6 +104,13 @@ namespace PresentationWebApp.Areas.Identity.Pages.Account
                             LastName = Input.LastName,
                             CreditCard = Input.CreditCard
                         });
+                    _cartsService.AddCart(
+                        new ComputerStore.Application.ViewModels.CartViewModel
+                        {
+                            MemberEmail = Input.Email
+                        });
+
+                    await _userManager.AddToRoleAsync(user, "User");
 
                     _logger.LogInformation("User created a new account with password.");
 

@@ -4,14 +4,16 @@ using ComputerStore.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ComputerStore.Data.Migrations
 {
     [DbContext(typeof(ComputerStoreDbContext))]
-    partial class ComputerStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210114172527_CartsAndOrdersTables")]
+    partial class CartsAndOrdersTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

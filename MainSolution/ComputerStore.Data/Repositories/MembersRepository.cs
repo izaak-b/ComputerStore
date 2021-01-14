@@ -9,7 +9,7 @@ namespace ComputerStore.Data.Repositories
 {
     public class MembersRepository : IMembersRepository
     {
-        ComputerStoreDbContext _context;
+        private ComputerStoreDbContext _context;
 
         public MembersRepository(ComputerStoreDbContext context)
         {

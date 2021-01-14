@@ -10,7 +10,7 @@ namespace ComputerStore.Data.Repositories
 {
     public class ProductsRepository : IProductsRepository
     {
-        ComputerStoreDbContext _context;
+        private ComputerStoreDbContext _context;
         public ProductsRepository(ComputerStoreDbContext context)
         {
             _context = context;

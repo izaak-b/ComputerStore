@@ -3,23 +3,23 @@ using ComputerStore.Domain.Interfaces;
 using ComputerStore.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace ComputerStore.Data.Repositories
 {
-    public class CategoriesRepository : ICategoriesRepository
+    public class CartsRepository : ICartsRepository
     {
         private ComputerStoreDbContext _context;
 
-        public CategoriesRepository(ComputerStoreDbContext context)
+        public CartsRepository(ComputerStoreDbContext context)
         {
             _context = context;
         }
 
-        public IQueryable<Category> GetCategories()
+        public void AddCart(Cart c)
         {
-            return _context.Categories;
+            _context.Carts.Add(c);
+            _context.SaveChanges();
         }
     }
 }

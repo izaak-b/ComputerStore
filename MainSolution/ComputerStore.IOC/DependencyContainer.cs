@@ -30,6 +30,9 @@ namespace ComputerStore.IOC
             services.AddScoped<ICartsRepository, CartsRepository>();
             services.AddScoped<ICartsService, CartsService>();
 
+            services.AddScoped<ICartItemsRepository, CartItemsRepository>();
+            services.AddScoped<ICartItemsService, CartItemsService>();
+
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
             AutoMapperConfiguration.RegisterMappings();
         }

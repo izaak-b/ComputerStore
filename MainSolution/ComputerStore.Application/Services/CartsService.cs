@@ -24,5 +24,10 @@ namespace ComputerStore.Application.Services
             var newCart = _mapper.Map<CartViewModel, Cart>(c);
             _repo.AddCart(newCart);
         }
+
+        public Guid GetCartId(string email)
+        {
+            return _repo.GetCartId(email);
+        }
     }
 }

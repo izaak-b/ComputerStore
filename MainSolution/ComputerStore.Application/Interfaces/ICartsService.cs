@@ -8,5 +8,6 @@ namespace ComputerStore.Application.Interfaces
     public interface ICartsService
     {
         void AddCart(CartViewModel c);
+        Guid GetCartId(string email);
     }
 }

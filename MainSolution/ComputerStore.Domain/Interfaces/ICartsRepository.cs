@@ -8,5 +8,6 @@ namespace ComputerStore.Domain.Interfaces
     public interface ICartsRepository
     {
         void AddCart(Cart c);
+        Guid GetCartId(string email);
     }
 }

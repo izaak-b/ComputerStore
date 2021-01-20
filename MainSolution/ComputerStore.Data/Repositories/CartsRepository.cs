@@ -3,6 +3,7 @@ using ComputerStore.Domain.Interfaces;
 using ComputerStore.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ComputerStore.Data.Repositories
@@ -20,6 +21,12 @@ namespace ComputerStore.Data.Repositories
         {
             _context.Carts.Add(c);
             _context.SaveChanges();
+        }
+
+        public Guid GetCartId(string email)
+        {
+            var cart = _context.Carts.SingleOrDefault(x => x.MemberEmail == email);
+            return cart.Id;
         }
     }
 }

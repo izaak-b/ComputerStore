@@ -14,11 +14,15 @@ namespace PresentationWebApp.Controllers
     {
         private readonly IProductsService _productsService;
         private readonly ICategoriesService _categoriesService;
+        private readonly ICartsService _cartsService;
+        private readonly ICartItemsService _cartItemsService;
         private readonly IWebHostEnvironment _env;
-        public ProductsController(IProductsService productsService, ICategoriesService categoriesService, IWebHostEnvironment env)
+        public ProductsController(IProductsService productsService, ICategoriesService categoriesService, ICartsService cartsService, ICartItemsService cartItemsService, IWebHostEnvironment env)
         {
             _productsService = productsService;
             _categoriesService = categoriesService;
+            _cartsService = cartsService;
+            _cartItemsService = cartItemsService;
             _env = env;
         }
 
@@ -75,6 +79,18 @@ namespace PresentationWebApp.Controllers
         {
             var product = _productsService.GetProduct(id);
             return View(product);
+        }
+
+        public IActionResult AddToCart(Guid prodId)
+        {
+            var cartItem = new CartItemViewModel()
+            {
+                CartId = _cartsService.GetCartId(User.Identity.Name),
+                ProductId = prodId,
+                Quantity = 1
+            };
+            _cartItemsService.AddCartItem(cartItem);
+            return RedirectToAction("Index");
         }
     }
 }

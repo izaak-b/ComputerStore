@@ -32,5 +32,20 @@ namespace PresentationWebApp.Controllers
             Guid id = _cartsService.GetCartId(User.Identity.Name);
             return RedirectToAction("Index", new { id = id });
         }
+
+        [Authorize]
+        public IActionResult Remove(Guid id)
+        {
+            try
+            {
+                _cartItemsService.DeleteCartItem(id);
+                TempData["feedback"] = "Product removed from cart";
+            }
+            catch(Exception ex)
+            {
+                TempData["warning"] = "Product not removed!";
+            }
+            return RedirectToAction("Redirect");
+        }
     }
 }

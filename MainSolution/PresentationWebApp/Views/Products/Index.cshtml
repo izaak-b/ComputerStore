@@ -1,43 +1,18 @@
 ﻿@model IEnumerable<ComputerStore.Application.ViewModels.ProductViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ProductList";
 }
 
 <h1>All Products</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <div class="container">
     <div class="row">
 
         @foreach (var p in Model)
         {
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="@p.ImageUrl" class="card-img-top image" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">@p.Name</h5>
-                        <p class="card-text">&euro;@p.Price</p>
-                        <a href="/Products/Details?id=@p.Id" class="btn btn-primary">Details</a>
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a class="btn btn-secondary" asp-action="AddToCart" asp-route-prodId="@p.Id">Add to Cart</a>
-                        }
-
-
-
-                        @*@if (User.IsInRole("Admin"))
-        {
-            <a href="/Products/Delete?id=@p.Id" class="btn btn-danger">Delete</a>
-        }*@
-
-                    </div>
-                </div>
-            </div>
+            <partial name="ProductPartial" model="p" />
         }
-
     </div>
 </div>

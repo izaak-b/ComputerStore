@@ -20,13 +20,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Product List</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Create">Add Product</a>
@@ -39,19 +33,7 @@
     <div class="container">
         <main role="main" class="pb-3">
 
-            @if (TempData["feedback"] != null)
-            {
-                <div class="alert alert-primary" role="alert">
-                    @TempData["feedback"]
-                </div>
-            }
-
-            @if (TempData["warning"] != null)
-            {
-                <div class="alert alert-warning" role="alert">
-                    @TempData["warning"]
-                </div>
-            }
+            <partial name="FeedbackPartial" />
 
             @RenderBody()
         </main>

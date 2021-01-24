@@ -1,0 +1,31 @@
+﻿
+    
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img src="@Model.ImageUrl" class="card-img-top image" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">&euro;@Model.Price</p>
+                    <a href="/Products/Details?id=@Model.Id" class="btn btn-primary">Details</a>
+
+                    @if (ViewData["Title"] == "ProductList")
+                    {
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="btn btn-secondary" asp-action="AddToCart" asp-route-prodId="@Model.Id">Add to Cart</a>
+                        }
+                    }
+                    else if (ViewData["Title"] == "Cart")
+                    {
+                        @Html.ActionLink("Remove", "Remove", new { id = Model.Id })
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    
+
+
+

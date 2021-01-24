@@ -16,6 +16,8 @@ namespace ComputerStore.Application.AutoMapper
             CreateMap<MemberViewModel, Member>();
             CreateMap<CartViewModel, Cart>();
             CreateMap<CartItemViewModel, CartItem>();
+            CreateMap<OrderViewModel, Order>();
+            CreateMap<OrderItemViewModel, OrderItem>();
         }
     }
 }

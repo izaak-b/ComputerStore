@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ComputerStore.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ComputerStore.Domain.Interfaces
 {
-    interface IOrdersRepository
+    public interface IOrdersRepository
     {
+        void AddOrder(Order o);
     }
 }

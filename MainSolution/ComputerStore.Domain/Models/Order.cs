@@ -14,5 +14,7 @@ namespace ComputerStore.Domain.Models
         public virtual Member Member { get; set; }
         [ForeignKey("Member")]
         public string MemberEmail { get; set; }
+        [Required]
+        public DateTime OrderDate { get; set; }
     }
 }

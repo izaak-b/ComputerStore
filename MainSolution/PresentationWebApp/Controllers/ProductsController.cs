@@ -1,5 +1,6 @@
 ﻿using ComputerStore.Application.Interfaces;
 using ComputerStore.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,7 @@ namespace PresentationWebApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var listOfCategories = _categoriesService.GetCategories();
@@ -41,6 +43,7 @@ namespace PresentationWebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(ProductViewModel data, IFormFile f)
         {
             try
@@ -62,12 +65,12 @@ namespace PresentationWebApp.Controllers
 
                 _productsService.AddProduct(data);
 
-                ViewData["feedback"] = "Product was added successfully";
+                TempData["feedback"] = "Product added successfully";
             }
             catch (Exception ex)
             {
                 //log error
-                ViewData["warning"] = "Product was not added!";
+                TempData["warning"] = "Product was not added!";
             }
 
             var listOfCategories = _categoriesService.GetCategories();
@@ -90,6 +93,7 @@ namespace PresentationWebApp.Controllers
                 Quantity = 1
             };
             _cartItemsService.AddCartItem(cartItem);
+            TempData["feedback"] = "Product added to cart";
             return RedirectToAction("Index");
         }
     }

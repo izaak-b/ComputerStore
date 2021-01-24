@@ -1,4 +1,5 @@
 ﻿using ComputerStore.Application.Interfaces;
+using ComputerStore.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,23 +12,37 @@ namespace PresentationWebApp.Controllers
     public class OrdersController : Controller
     {
         private readonly IOrdersService _ordersService;
+        private readonly IOrderItemsService _orderItemsService;
 
-        public OrdersController(IOrdersService ordersService)
+        public OrdersController(IOrdersService ordersService, IOrderItemsService orderItemsService)
         {
             _ordersService = ordersService;
+            _orderItemsService = orderItemsService;
         }
 
         [Authorize]
-        public IActionResult Index()
+        public IActionResult LastOrder()
         {
-            return View();
+            Guid orderId = _ordersService.GetLastOrder(User.Identity.Name);
+            var orderItemsList = _orderItemsService.GetOrderItems(orderId);
+            return View(orderItemsList);
         }
 
         [Authorize]
         public IActionResult Checkout()
         {
-            _ordersService.Checkout(User.Identity.Name);
-            return View();
+            try
+            {
+                _ordersService.Checkout(User.Identity.Name);
+                TempData["feedback"] = "Products have been checked out!";
+                return RedirectToAction("LastOrder");
+            }
+            catch (Exception ex)
+            {
+                TempData["warning"] = "Checkout failed!";
+            }
+
+            return RedirectToAction("Index", "Carts");
         }
     }
 }

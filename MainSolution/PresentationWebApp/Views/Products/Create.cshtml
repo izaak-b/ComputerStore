@@ -40,7 +40,7 @@
                 <label class="control-label">Image Url</label>
                 <input asp-for="ImageUrl" class="form-control" />
 
-                <input name="f" class="form-control" type="file" />
+                @*<input name="f" class="form-control" type="file" />*@
 
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
@@ -55,6 +55,4 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+

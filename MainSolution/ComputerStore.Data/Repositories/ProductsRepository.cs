@@ -23,6 +23,12 @@ namespace ComputerStore.Data.Repositories
             return p.Id;
         }
 
+        public void DeleteProduct(Product p)
+        {
+            _context.Products.Remove(p);
+            _context.SaveChanges();
+        }
+
         public Product GetProduct(Guid id)
         {
             return _context.Products.SingleOrDefault(x => x.Id == id);
@@ -30,7 +36,7 @@ namespace ComputerStore.Data.Repositories
 
         public IQueryable<Product> GetProducts()
         {
-            return _context.Products;
+            return _context.Products.OrderBy(x => x.CategoryId);
         }
 
         public IQueryable<Product> GetProducts(int category)

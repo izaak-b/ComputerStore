@@ -8,5 +8,6 @@ namespace ComputerStore.Domain.Interfaces
     public interface IOrdersRepository
     {
         void AddOrder(Order o);
+        Guid GetLastOrder(string email);
     }
 }

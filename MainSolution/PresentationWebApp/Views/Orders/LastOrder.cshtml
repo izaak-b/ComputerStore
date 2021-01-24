@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ComputerStore.Application.ViewModels.OrderItemViewModel>
+
+@{
+    ViewData["Title"] = "LastOrder";
+}
+
+<h1>Last Order</h1>
+
+
+<div class="container">
+    <div class="row">
+
+        @foreach (var o in Model)
+        {
+            var product = o.Product;
+            <partial name="ProductPartial" model="product" />
+        }
+    </div>
+</div>

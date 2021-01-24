@@ -3,6 +3,7 @@ using ComputerStore.Domain.Interfaces;
 using ComputerStore.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ComputerStore.Data.Repositories
@@ -20,6 +21,11 @@ namespace ComputerStore.Data.Repositories
         {
             _context.OrderItems.Add(orderItem);
             _context.SaveChanges();
+        }
+
+        public IQueryable<OrderItem> GetOrderItems(Guid id)
+        {
+            return _context.OrderItems.Where(x => x.OrderId == id);
         }
     }
 }

@@ -56,5 +56,10 @@ namespace ComputerStore.Application.Services
             }
 
         }
+
+        public Guid GetLastOrder(string email)
+        {
+            return _repo.GetLastOrder(email);
+        }
     }
 }

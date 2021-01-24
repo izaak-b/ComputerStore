@@ -39,6 +39,16 @@ namespace ComputerStore.Application.Services
             _productsRepo.AddProduct(newProduct);
         }
 
+        public void DeleteProduct(Guid id)
+        {
+            var pToDelete = _productsRepo.GetProduct(id);
+
+            if (pToDelete != null)
+            {
+                _productsRepo.DeleteProduct(pToDelete);
+            }
+        }
+
         public ProductViewModel GetProduct(Guid id)
         {
             var product = _productsRepo.GetProduct(id);

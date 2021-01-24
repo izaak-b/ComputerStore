@@ -12,5 +12,6 @@ namespace ComputerStore.Domain.Interfaces
         IQueryable<Product> GetProducts(int category);
         Product GetProduct(Guid id);
         Guid AddProduct(Product p);
+        void DeleteProduct(Product p);
     }
 }

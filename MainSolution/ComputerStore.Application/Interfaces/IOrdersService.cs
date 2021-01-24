@@ -9,5 +9,6 @@ namespace ComputerStore.Application.Interfaces
     {
         void AddOrder(OrderViewModel o);
         void Checkout(string email);
+        Guid GetLastOrder(string email);
     }
 }

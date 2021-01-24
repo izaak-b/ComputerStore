@@ -44,11 +44,11 @@ namespace PresentationWebApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public IActionResult Create(ProductViewModel data, IFormFile f)
+        public IActionResult Create(ProductViewModel data/*, IFormFile f*/)
         {
             try
             {
-                if (f != null)
+                /*if (f != null)
                 {
                     if (f.Length > 0)
                     {
@@ -61,10 +61,9 @@ namespace PresentationWebApp.Controllers
 
                         data.ImageUrl = @"\Images\" + newFileName;
                     }
-                }
+                }*/
 
                 _productsService.AddProduct(data);
-
                 TempData["feedback"] = "Product added successfully";
             }
             catch (Exception ex)
@@ -72,16 +71,31 @@ namespace PresentationWebApp.Controllers
                 //log error
                 TempData["warning"] = "Product was not added!";
             }
-
+            
             var listOfCategories = _categoriesService.GetCategories();
             ViewBag.Categories = listOfCategories;
-            return View(data);
+            return RedirectToAction("Create");
         }
 
         public IActionResult Details(Guid id)
         {
             var product = _productsService.GetProduct(id);
             return View(product);
+        }
+
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _productsService.DeleteProduct(id);
+                TempData["feedback"] = "Product was deleted";
+            }
+            catch (Exception ex)
+            {
+                TempData["warning"] = "Product was not deleted";
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult AddToCart(Guid prodId)

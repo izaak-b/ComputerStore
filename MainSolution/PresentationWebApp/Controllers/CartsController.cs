@@ -20,17 +20,11 @@ namespace PresentationWebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult Index(Guid id)
+        public IActionResult Index()
         {
-            var cartItemsList = _cartItemsService.GetCartItems(id);
+            Guid cartId = _cartsService.GetCartId(User.Identity.Name);
+            var cartItemsList = _cartItemsService.GetCartItems(cartId);
             return View(cartItemsList);
-        }
-
-        [Authorize]
-        public IActionResult Redirect()
-        {
-            Guid id = _cartsService.GetCartId(User.Identity.Name);
-            return RedirectToAction("Index", new { id = id });
         }
 
         [Authorize]
@@ -45,7 +39,7 @@ namespace PresentationWebApp.Controllers
             {
                 TempData["warning"] = "Product not removed!";
             }
-            return RedirectToAction("Redirect");
+            return RedirectToAction("Index");
         }
     }
 }

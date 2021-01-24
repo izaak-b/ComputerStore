@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using ComputerStore.Application.Interfaces;
 using ComputerStore.Application.ViewModels;
 using ComputerStore.Domain.Interfaces;
 using ComputerStore.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ComputerStore.Application.Services
@@ -24,6 +26,12 @@ namespace ComputerStore.Application.Services
         {
             var newOrderItem = _mapper.Map<OrderItemViewModel, OrderItem>(orderItem);
             _repo.AddOrderItem(newOrderItem);
+        }
+
+        public IQueryable<OrderItemViewModel> GetOrderItems(Guid id)
+        {
+            var orderItems = _repo.GetOrderItems(id).ProjectTo<OrderItemViewModel>(_mapper.ConfigurationProvider);
+            return orderItems;
         }
     }
 }
